@@ -1,0 +1,6 @@
+[submodule "FactoryEngine/vendor/glfw"]
+	path = FactoryEngine/vendor/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "FactoryEngine/vendor/glad"]
+	path = FactoryEngine/vendor/glad
+	url = https://github.com/Dav1dde/glad.git

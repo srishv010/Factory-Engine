@@ -1,5 +1,6 @@
-set(appsources 
-    src/main.cpp
+file ( GLOB_RECURSE appsources
+    src/*.h
+    src/*.cpp
 )
 
 add_executable(Sandbox ${appsources})
