@@ -29,6 +29,6 @@ target_compile_definitions(FactoryEngine PRIVATE FACTORY_BUILD_DLL)
 set_target_properties(FactoryEngine PROPERTIES
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED YES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin  # Put the DLL in bin/ directory
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib  # Put the import library (glad.lib) in lib/
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
 )

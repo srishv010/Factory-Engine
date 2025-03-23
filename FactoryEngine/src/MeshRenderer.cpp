@@ -7,42 +7,62 @@ namespace Factory {
 
 	namespace FactoryEngine {
 
+        using namespace RenderAPI;
+        using namespace OpenGL;
+
 		namespace LowLevelGraphics {
 
-			MeshRenderData::MeshRenderData(Mesh* meshData) : meshData(meshData) { }
+			MeshRenderData::MeshRenderData(Mesh* meshData) : meshData(meshData) {
+				vertexArray = nullptr;
+				vertexBuffer = nullptr;
+				indexBuffer = nullptr;
+			}
+
             MeshRenderData::~MeshRenderData() {
-                glDeleteVertexArrays(1, &vertexArray);
-                glDeleteBuffers(1, &vertexBuffer);
-                glDeleteBuffers(1, &indexBuffer);
+                delete vertexArray;
+				delete vertexBuffer;
+				delete indexBuffer;
             }
 
 			void MeshRenderData::TransferData() {
-                glGenVertexArrays(1, &vertexArray);
-                glGenBuffers(1, &vertexBuffer);
-                glGenBuffers(1, &indexBuffer);
+				vertexArray = new GLVertexArray(std::vector<VertexArrayAttribute>());
+				vertexBuffer = new GLBuffer(GL_ARRAY_BUFFER, GL_STATIC_DRAW);
+				indexBuffer = new GLBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW);
 
-                glBindVertexArray(vertexArray);
+                vertexArray->Bind();
 
-                glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-                glBufferData(GL_ARRAY_BUFFER, meshData->vertices.size() * sizeof(Vertex), &(meshData->vertices)[0], GL_STATIC_DRAW);
+				vertexBuffer->SetData(&(meshData->vertices)[0], meshData->vertices.size() * sizeof(Vertex));
+				vertexBuffer->Bind();
 
-                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-                glBufferData(GL_ELEMENT_ARRAY_BUFFER, meshData->indices.size() * sizeof(unsigned int), &(meshData->indices)[0], GL_STATIC_DRAW);
+				indexBuffer->SetData(&(meshData->indices)[0], meshData->indices.size() * sizeof(unsigned int));
+                indexBuffer->Bind();
 
-                glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-                glEnableVertexAttribArray(0);
+				vertexArray->AddAttribute(VertexArrayAttribute(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0));
 
-                glBindVertexArray(0);
-                glBindBuffer(GL_ARRAY_BUFFER, 0);
-                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+				vertexArray->Unbind();
+				vertexBuffer->Unbind();
+				indexBuffer->Unbind();
 			}
 
             void MeshRenderData::Render() {
-                glBindVertexArray(vertexArray);
+				vertexArray->Bind();
                 glDrawElements(GL_TRIANGLES, meshData->indices.size(), GL_UNSIGNED_INT, 0);
-                glBindVertexArray(0);
+				vertexArray->Unbind();
             }
 
+		}
+
+		MeshRenderer::MeshRenderer(Mesh* meshData) {
+			meshRenderData = new LowLevelGraphics::MeshRenderData(meshData);
+			meshRenderData->TransferData();
+		}
+
+		MeshRenderer::~MeshRenderer() {
+			delete meshRenderData;
+		}
+
+		void MeshRenderer::Render() {
+			meshRenderData->Render();
 		}
 
 	}

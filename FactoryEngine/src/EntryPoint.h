@@ -106,8 +106,7 @@ int main() {
     };
 
     Mesh mesh(vertices, indices);
-    MeshRenderData meshRenderData(&mesh);
-    meshRenderData.TransferData();
+    MeshRenderer meshRenderer(&mesh);
 
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -118,7 +117,7 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         glUseProgram(shaderProgram);
-        meshRenderData.Render();
+        meshRenderer.Render();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
