@@ -23,8 +23,6 @@ namespace Factory
 			std::vector<Vertex> vertices;
 			std::vector<unsigned int> indices;
 
-			unsigned int vertexArray, vertexBuffer, indexBuffer;
-
 			Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
 		};
 

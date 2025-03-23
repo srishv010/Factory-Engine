@@ -1,14 +1,15 @@
 #include "MeshRenderer.h"
-#include <glad/glad.h>
 
 #include <iostream>
+
+#include "RenderAPIDataTypes.h"
+
 
 namespace Factory {
 
 	namespace FactoryEngine {
 
         using namespace RenderAPI;
-        using namespace OpenGL;
 
 		namespace LowLevelGraphics {
 
@@ -25,9 +26,9 @@ namespace Factory {
             }
 
 			void MeshRenderData::TransferData() {
-				vertexArray = new GLVertexArray(std::vector<VertexArrayAttribute>());
-				vertexBuffer = new GLBuffer(GL_ARRAY_BUFFER, GL_STATIC_DRAW);
-				indexBuffer = new GLBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW);
+				vertexArray = RenderingAPI::CreateVertexArray(std::vector<VertexArrayAttribute>());
+				vertexBuffer = RenderingAPI::CreateBuffer(BufferType::ARRAY_BUFFER, BufferUsagePattern::STATIC_DRAW);
+				indexBuffer = RenderingAPI::CreateBuffer(BufferType::ELEMENT_ARRAY_BUFFER, BufferUsagePattern::STATIC_DRAW);
 
                 vertexArray->Bind();
 
@@ -37,7 +38,7 @@ namespace Factory {
 				indexBuffer->SetData(&(meshData->indices)[0], meshData->indices.size() * sizeof(unsigned int));
                 indexBuffer->Bind();
 
-				vertexArray->AddAttribute(VertexArrayAttribute(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0));
+				vertexArray->AddAttribute(VertexArrayAttribute(0, 3, DataType::FLOAT, false, 3 * sizeof(float), (void*)0));
 
 				vertexArray->Unbind();
 				vertexBuffer->Unbind();
@@ -46,7 +47,7 @@ namespace Factory {
 
             void MeshRenderData::Render() {
 				vertexArray->Bind();
-                glDrawElements(GL_TRIANGLES, meshData->indices.size(), GL_UNSIGNED_INT, 0);
+				RenderingAPI::DrawElements(PrimitiveType::TRIANGLES, meshData->indices.size(), DataType::UNSIGNED_INT, 0);
 				vertexArray->Unbind();
             }
 

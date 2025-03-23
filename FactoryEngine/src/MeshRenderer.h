@@ -3,8 +3,7 @@
 #include "Core.h"
 #include "Mesh.h"
 
-#include "VertexArray.h"
-#include "Buffer.h"
+#include "RenderAPI.h"
 
 
 namespace Factory {
@@ -12,15 +11,14 @@ namespace Factory {
 	namespace FactoryEngine {
 
 		using namespace RenderAPI;
-		using namespace OpenGL;
 
 		namespace LowLevelGraphics {
 
 			class FACTORY_API MeshRenderData {
 			public:
-				GLVertexArray* vertexArray;
-				GLBuffer* vertexBuffer;
-				GLBuffer* indexBuffer;
+				VertexArray* vertexArray;
+				Buffer* vertexBuffer;
+				Buffer* indexBuffer;
 				Mesh* meshData;
 
 				MeshRenderData(Mesh* meshData);

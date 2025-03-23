@@ -7,9 +7,14 @@ namespace Factory {
 
 		namespace RenderAPI {
 
+			Buffer::Buffer(BufferType type, BufferUsagePattern usagePattern) {}
+
 			namespace OpenGL {
 
-				GLBuffer::GLBuffer(GLenum type, GLenum usagePattern) : type(type), usagePattern(usagePattern) {
+				GLBuffer::GLBuffer(BufferType type, BufferUsagePattern usagePattern)
+					: Buffer(type, usagePattern),
+					type(ToGLBufferType(type)), 
+					usagePattern(ToGLBufferUsagePattern(usagePattern)) {
 					glGenBuffers(1, &index);
 				}
 
