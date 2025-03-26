@@ -27,6 +27,16 @@ namespace Factory {
 				}
 			}
 
+			ShaderProgram* RenderingAPI::CreateShaderProgram()
+			{
+				switch (apiType) {
+				case RenderAPIType::OPEN_GL:
+					return new OpenGL::GLShaderProgram();
+				default:
+					return nullptr;
+				}
+			}
+
 			void RenderingAPI::DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices)
 			{
 				switch (apiType) {

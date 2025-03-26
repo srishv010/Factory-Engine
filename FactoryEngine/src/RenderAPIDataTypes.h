@@ -37,7 +37,7 @@ namespace Factory {
 				DYNAMIC_DRAW
 			};
 
-			enum class PrimitiveType {
+			enum class FACTORY_API PrimitiveType {
 				POINTS,
 				LINES,
 				LINE_LOOP,
@@ -45,6 +45,11 @@ namespace Factory {
 				TRIANGLES,
 				TRIANGLE_STRIP,
 				TRIANGLE_FAN
+			};
+
+			enum class FACTORY_API ShaderType {
+				VERTEX_SHADER,
+				FRAGMENT_SHADER
 			};
 
 			namespace OpenGL {
@@ -58,6 +63,8 @@ namespace Factory {
 				GLenum ToGLBufferUsagePattern(BufferUsagePattern usagePattern);
 
 				GLenum ToGLPrimitiveType(PrimitiveType type);
+
+				GLenum ToGLShaderType(ShaderType type);
 
 			}
 		}

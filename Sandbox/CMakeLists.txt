@@ -24,6 +24,7 @@ set_target_properties(Sandbox PROPERTIES
 
 set_target_properties(Sandbox PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    VS_DEBUGGER_WORKING_DIRECTORY $<IF:$<CONFIG:Debug>,${CMAKE_BINARY_DIR}/bin/Debug,${CMAKE_BINARY_DIR}/bin/Release>
 )
 
 add_custom_command(TARGET Sandbox POST_BUILD
@@ -31,4 +32,3 @@ add_custom_command(TARGET Sandbox POST_BUILD
     $<TARGET_FILE:FactoryEngine>
     $<IF:$<CONFIG:Debug>,${CMAKE_BINARY_DIR}/bin/Debug,${CMAKE_BINARY_DIR}/bin/Release>
 )
-
