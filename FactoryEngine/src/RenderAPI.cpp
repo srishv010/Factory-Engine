@@ -10,6 +10,16 @@ namespace Factory {
 		namespace RenderAPI {
 
 			RenderAPIType RenderingAPI::apiType = RenderAPIType::OPEN_GL;
+
+			Window* RenderingAPI::CreateWindow(int width, int height, const char* title) {
+				switch (apiType) {
+				case RenderAPIType::OPEN_GL:
+					return new OpenGL::GLWindow(width, height, title);
+				default:
+					return nullptr;
+				}
+			}
+
 			VertexArray* RenderingAPI::CreateVertexArray(std::vector<VertexArrayAttribute> attributes) {
 				switch (apiType) {
 				case RenderAPIType::OPEN_GL:

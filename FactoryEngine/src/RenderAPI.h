@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "Core.h"
+#include "Window.h"
 #include "VertexArray.h"
 #include "Buffer.h"
 #include "Shader.h"
@@ -18,6 +19,7 @@ namespace Factory {
 			class FACTORY_API RenderingAPI {
 			public:
 				static RenderAPIType apiType;
+				static Window* CreateWindow(int width, int height, const char* title);
 				static VertexArray* CreateVertexArray(std::vector<VertexArrayAttribute> attributes);
 				static Buffer* CreateBuffer(BufferType type, BufferUsagePattern usagePattern);
 				static ShaderProgram* CreateShaderProgram();
