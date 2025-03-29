@@ -15,8 +15,6 @@ target_link_libraries(Sandbox PRIVATE FactoryEngine)
 
 target_include_directories(Sandbox PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
-target_compile_definitions(FactoryEngine PUBLIC FACTORY_PLATFORM_WINDOWS)
-
 set_target_properties(Sandbox PROPERTIES
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED YES
@@ -31,4 +29,10 @@ add_custom_command(TARGET Sandbox POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
     $<TARGET_FILE:FactoryEngine>
     $<IF:$<CONFIG:Debug>,${CMAKE_BINARY_DIR}/bin/Debug,${CMAKE_BINARY_DIR}/bin/Release>
+)
+
+add_custom_command(TARGET Sandbox POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_CURRENT_SOURCE_DIR}/resources
+    $<IF:$<CONFIG:Debug>,${CMAKE_BINARY_DIR}/bin/Debug/resources,${CMAKE_BINARY_DIR}/bin/Release/resources>
 )

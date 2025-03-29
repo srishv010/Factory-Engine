@@ -23,5 +23,3 @@ namespace RenderAPIInterface {
 
 
 }
-
-extern RenderAPIInterface::IRenderAPI* CreateRenderAPI();

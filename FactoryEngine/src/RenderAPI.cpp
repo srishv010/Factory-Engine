@@ -1,5 +1,8 @@
 #include "RenderAPI.h"
 
+#include <windows.h>
+#undef CreateWindow
+
 
 namespace Factory {
 	
@@ -9,9 +12,25 @@ namespace Factory {
 
 			IRenderAPI* RenderingAPI::renderAPI = nullptr;
 
-			void RenderingAPI::Initialize() {
-				if (renderAPI == nullptr)
-					renderAPI = CreateRenderAPI();
+			void RenderingAPI::Initialize(const char* renderAPIName) {
+				if (renderAPI != nullptr) return;
+				std::string renderAPINameStr = std::string(renderAPIName) + ".dll";
+				HMODULE renderAPIModule = LoadLibraryA(renderAPINameStr.c_str());
+				if (!renderAPIModule) {
+					std::cout << "Failed to load render API module" << std::endl;
+					return;
+				}
+
+				typedef IRenderAPI* (*CreateRenderAPIFunc)();
+				CreateRenderAPIFunc GetRenderAPI = (CreateRenderAPIFunc)GetProcAddress(renderAPIModule, "CreateRenderAPI");
+
+				if (!GetRenderAPI) {
+					DWORD error = GetLastError();
+					std::cout << "GetProcAddress failed! Error code: " << error << std::endl;
+					return;
+				}
+
+				renderAPI = GetRenderAPI();
 			}
 
 			void RenderingAPI::Terminate() {

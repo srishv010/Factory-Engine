@@ -3,11 +3,13 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <filesystem>
 
+#include "Core.h"
 #include "Mesh.h"
+#include "EngineConfig.h"
 #include "MeshRenderer.h"
 #include "Utilities.h"
-#include "Window.h"
 #include "RenderAPI.h"
 
 
@@ -20,10 +22,11 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 
-int main() {
+int main(int argc, char* argv[]) {
 	std::cout << "Factory Engine." << std::endl;
-	
-	RenderingAPI::Initialize();
+
+	EngineConfig config =  GetEngineConfig("resources/engineconfig.ini");
+	RenderingAPI::Initialize(config.renderAPIName.c_str());
 
 	Window* window = RenderingAPI::CreateWindow(SCR_WIDTH, SCR_HEIGHT, "Factory Engine");
 

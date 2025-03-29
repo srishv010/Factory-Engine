@@ -12,7 +12,7 @@ add_library(FactoryEngine SHARED ${sources})
 add_dependencies(FactoryEngine RenderAPIInterface)
 add_dependencies(FactoryEngine OpenGLRenderAPI)
 
-target_link_libraries(FactoryEngine glm::glm RenderAPIInterface OpenGLRenderAPI)
+target_link_libraries(FactoryEngine glm::glm RenderAPIInterface)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm)
 

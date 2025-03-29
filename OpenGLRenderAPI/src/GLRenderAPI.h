@@ -10,7 +10,11 @@
 #include "Shader.h"
 
 
-
+#ifdef OPEN_GL_RENDER_API_BUILD_DLL
+#define RENDERAPI extern "C" __declspec(dllexport)
+#else
+#define RENDERAPI extern "C" __declspec(dllimport)
+#endif
 
 using namespace RenderAPIInterface;
 
@@ -28,6 +32,6 @@ namespace GLRenderAPI {
 
 }
 
-extern RenderAPIInterface::IRenderAPI* CreateRenderAPI() {
+RENDERAPI RenderAPIInterface::IRenderAPI* CreateRenderAPI() {
 	return new GLRenderAPI::GLRenderingAPI();
 }

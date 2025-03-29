@@ -19,7 +19,7 @@ namespace Factory {
 				RenderingAPI() = delete;
 				~RenderingAPI() = delete;
 
-				static void Initialize();
+				static void Initialize(const char* renderAPIName);
 				static void Terminate();
 				static Window* CreateWindow(int width, int height, const char* title);
 				static VertexArray* CreateVertexArray(std::vector<VertexArrayAttribute> attributes);
