@@ -69,5 +69,7 @@ int main() {
 	delete shaderProgram;
 	delete window;
 
+	RenderingAPI::Terminate();
+
 	return 0;
 }

@@ -21,4 +21,7 @@ namespace RenderAPIInterface {
 		virtual void DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices) = 0;
 	};
 
+
 }
+
+extern RenderAPIInterface::IRenderAPI* CreateRenderAPI();

@@ -31,10 +31,6 @@ namespace RenderAPIInterface {
 
 	class VertexArray {
 	public:
-		std::vector<VertexArrayAttribute> attributes;
-
-		VertexArray(std::vector<VertexArrayAttribute> attributes)
-			: attributes(attributes) { }
 		virtual void AddAttribute(VertexArrayAttribute attribute) = 0;
 		virtual void Bind() = 0;
 		virtual void Unbind() = 0;

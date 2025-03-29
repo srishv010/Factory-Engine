@@ -14,6 +14,8 @@ namespace GLRenderAPI {
 
 		class GLWindow : public Window {
 			public:
+				int width, height;
+				const char* title;
 				GLFWwindow* window;
 
 				GLWindow(int width, int height, const char* title);

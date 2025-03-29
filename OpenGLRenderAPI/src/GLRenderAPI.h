@@ -10,6 +10,8 @@
 #include "Shader.h"
 
 
+
+
 using namespace RenderAPIInterface;
 
 namespace GLRenderAPI {
@@ -24,4 +26,8 @@ namespace GLRenderAPI {
 		void DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices);
 	};
 
+}
+
+extern RenderAPIInterface::IRenderAPI* CreateRenderAPI() {
+	return new GLRenderAPI::GLRenderingAPI();
 }

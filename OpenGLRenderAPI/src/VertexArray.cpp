@@ -6,7 +6,7 @@ using namespace RenderAPIInterface;
 
 namespace GLRenderAPI {
 
-	GLVertexArray::GLVertexArray(std::vector<VertexArrayAttribute> attributes) : VertexArray(attributes) {
+	GLVertexArray::GLVertexArray(std::vector<VertexArrayAttribute> attributes) : attributes(attributes) {
 		glGenVertexArrays(1, &index);
 		glBindVertexArray(index);
 		for (VertexArrayAttribute const &attribute : attributes) {

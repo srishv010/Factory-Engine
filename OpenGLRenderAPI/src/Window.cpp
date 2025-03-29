@@ -3,7 +3,10 @@
 
 namespace GLRenderAPI {
 
-	GLWindow::GLWindow(int width, int height, const char* title) : Window(width, height, title) {
+	GLWindow::GLWindow(int width, int height, const char* title)
+		: width(width),
+		height(height),
+		title(title) {
 		window = nullptr;
 
 		if (glfwInit() == GLFW_FALSE) {

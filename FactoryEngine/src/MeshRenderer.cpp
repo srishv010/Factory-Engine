@@ -5,8 +5,6 @@
 #include "RenderAPIDataTypes.h"
 
 
-using namespace RenderAPIInterface;
-
 namespace Factory {
 
 	namespace FactoryEngine {

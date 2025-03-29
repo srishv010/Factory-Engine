@@ -15,6 +15,7 @@ namespace GLRenderAPI {
 	class GLVertexArray : public VertexArray {
 	public:
 		unsigned int index;
+		std::vector<VertexArrayAttribute> attributes;
 
 		GLVertexArray(std::vector<VertexArrayAttribute> attributes);
 		~GLVertexArray();

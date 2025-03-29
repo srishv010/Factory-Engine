@@ -9,6 +9,7 @@ namespace Factory {
 
 	namespace FactoryEngine {
 
+		using namespace RenderAPI;
 
 		namespace LowLevelGraphics {
 
