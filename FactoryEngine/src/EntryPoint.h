@@ -11,6 +11,7 @@
 #include "MeshRenderer.h"
 #include "Utilities.h"
 #include "RenderAPI.h"
+#include "GameObject.h"
 
 
 using namespace Factory;
@@ -53,9 +54,14 @@ int main(int argc, char* argv[]) {
 	};
 
 	Mesh mesh(vertices, indices);
-	MeshRenderer meshRenderer(&mesh);
+	GameObject rectangle("Rectangle");
+
+	MeshRenderer* meshRenderer = rectangle.AddComponent<MeshRenderer>();
+	meshRenderer->SetMesh(&mesh);
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+
 
 	while (!window->ShouldClose()) {
 		window->ProcessInput();
@@ -63,7 +69,7 @@ int main(int argc, char* argv[]) {
 		window->ClearColor(0.5, 0.8, 0.9, 1.0);
 
 		shaderProgram->Activate();
-		meshRenderer.Render();
+		rectangle.Update();
 
 		window->SwapBuffers();
 		window->PollEvents();

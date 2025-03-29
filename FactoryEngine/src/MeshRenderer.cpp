@@ -53,10 +53,11 @@ namespace Factory {
 
 		}
 
-		MeshRenderer::MeshRenderer(Mesh* meshData) {
+		void MeshRenderer::SetMesh(Mesh* meshData) {
 			meshRenderData = new LowLevelGraphics::MeshRenderData(meshData);
 			meshRenderData->TransferData();
 		}
+
 
 		MeshRenderer::~MeshRenderer() {
 			delete meshRenderData;
@@ -64,6 +65,10 @@ namespace Factory {
 
 		void MeshRenderer::Render() {
 			meshRenderData->Render();
+		}
+
+		void MeshRenderer::Update() {
+			Render();
 		}
 
 	}

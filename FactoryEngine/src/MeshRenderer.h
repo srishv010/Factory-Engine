@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "GameObject.h"
 #include "Mesh.h"
 
 #include "RenderAPI.h"
@@ -29,12 +30,14 @@ namespace Factory {
 
 		}
 
-		class FACTORY_API MeshRenderer {
+		class FACTORY_API MeshRenderer : public Component {
+			friend class GameObject;
 		private:
-			LowLevelGraphics::MeshRenderData* meshRenderData;
+			LowLevelGraphics::MeshRenderData* meshRenderData = nullptr;
+			void Update() override;
 		public:
-			MeshRenderer(Mesh* meshData);
 			~MeshRenderer();
+			void SetMesh(Mesh* meshData);
 			void Render();
 		};
 
