@@ -1,9 +1,9 @@
-[submodule "FactoryEngine/vendor/glfw"]
-	path = FactoryEngine/vendor/glfw
-	url = https://github.com/glfw/glfw.git
-[submodule "FactoryEngine/vendor/glad"]
-	path = FactoryEngine/vendor/glad
-	url = https://github.com/Dav1dde/glad.git
 [submodule "FactoryEngine/vendor/glm"]
 	path = FactoryEngine/vendor/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "OpenGLRenderAPI/vendor/glfw"]
+	path = OpenGLRenderAPI/vendor/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "OpenGLRenderAPI/vendor/glm"]
+	path = OpenGLRenderAPI/vendor/glm
 	url = https://github.com/g-truc/glm.git

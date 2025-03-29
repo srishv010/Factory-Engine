@@ -5,24 +5,18 @@ file ( GLOB_RECURSE sources CMAKE_CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/resources/shaders/*.glsl
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/include/*.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/src/glad.c
 )
 
 add_library(FactoryEngine SHARED ${sources})
 
-find_package(OpenGL REQUIRED)
+add_dependencies(FactoryEngine RenderAPIInterface)
+add_dependencies(FactoryEngine OpenGLRenderAPI)
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw)
+target_link_libraries(FactoryEngine glm::glm RenderAPIInterface OpenGLRenderAPI)
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm)
 
-target_link_libraries(FactoryEngine glfw OpenGL::GL glm::glm)
-
-
 target_include_directories(FactoryEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
-target_include_directories(FactoryEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/include)
-target_include_directories(FactoryEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/src)
 
 target_compile_definitions(FactoryEngine PUBLIC FACTORY_PLATFORM_WINDOWS)
 target_compile_definitions(FactoryEngine PRIVATE FACTORY_BUILD_DLL)

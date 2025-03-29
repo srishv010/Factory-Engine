@@ -6,9 +6,9 @@
 
 #include "Mesh.h"
 #include "MeshRenderer.h"
-#include "RenderAPI.h"
 #include "Utilities.h"
 #include "Window.h"
+#include "RenderAPI.h"
 
 
 using namespace Factory;
@@ -22,6 +22,8 @@ const unsigned int SCR_HEIGHT = 600;
 
 int main() {
 	std::cout << "Factory Engine." << std::endl;
+	
+	RenderingAPI::Initialize();
 
 	Window* window = RenderingAPI::CreateWindow(SCR_WIDTH, SCR_HEIGHT, "Factory Engine");
 

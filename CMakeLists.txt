@@ -3,5 +3,7 @@ cmake_policy(SET CMP0048 NEW)
 
 project(FactoryEngine)
 
+add_subdirectory(RenderAPIInterface)
+add_subdirectory(OpenGLRenderAPI)
 add_subdirectory(FactoryEngine)
 add_subdirectory(Sandbox)

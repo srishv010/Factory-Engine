@@ -54,11 +54,7 @@ struct gladGLversionStruct {
 
 typedef void* (* GLADloadproc)(const char *name);
 
-#ifdef FACTORY_BUILD_DLL
-    #define GLAPI __declspec(dllexport) extern
-#else
-    #define GLAPI __declspec(dllimport) extern
-#endif
+#define GLAPI extern
 
 GLAPI struct gladGLversionStruct GLVersion;
 

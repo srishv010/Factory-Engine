@@ -13,7 +13,7 @@ add_dependencies(Sandbox FactoryEngine)
 
 target_link_libraries(Sandbox PRIVATE FactoryEngine)
 
-target_include_directories(Sandbox PRIVATE ${CMAKE_SOURCE_DIR}/FactoryEngine/src)
+target_include_directories(Sandbox PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
 target_compile_definitions(FactoryEngine PUBLIC FACTORY_PLATFORM_WINDOWS)
 
