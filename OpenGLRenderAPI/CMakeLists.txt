@@ -17,7 +17,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glfw)
 add_dependencies(OpenGLRenderAPI RenderAPIInterface)
 
 target_link_libraries(OpenGLRenderAPI PUBLIC glfw OpenGL::GL)
-target_link_libraries(OpenGLRenderAPI PUBLIC RenderAPIInterface)
+target_link_libraries(OpenGLRenderAPI PUBLIC glm::glm RenderAPIInterface)
 
 target_include_directories(OpenGLRenderAPI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_include_directories(OpenGLRenderAPI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/include)

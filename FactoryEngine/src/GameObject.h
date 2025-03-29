@@ -26,12 +26,13 @@ namespace Factory {
 				T* component = new T();
 				component->gameObject = this;
 				components.push_back(component);
+				component->OnCreate();
 				return component;
 			}
-			template <typename T> Component* GetComponent() {
+			template <typename T> T* GetComponent() {
 				for (Component* component : components) {
 					if (dynamic_cast<T*>(component)) {
-						return component;
+						return dynamic_cast<T*>(component);
 					}
 				}
 				return nullptr;
@@ -50,6 +51,7 @@ namespace Factory {
 		public:
 			GameObject* gameObject = nullptr;
 		private:
+			virtual void OnCreate();
 			virtual void Update();
 		};
 

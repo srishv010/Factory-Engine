@@ -19,6 +19,8 @@ namespace Factory {
 			}
 		}
 
+		void Component::OnCreate() { }
+
 		void Component::Update() { }
 
 	}

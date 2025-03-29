@@ -58,13 +58,20 @@ namespace Factory {
 			meshRenderData->TransferData();
 		}
 
-
 		MeshRenderer::~MeshRenderer() {
 			delete meshRenderData;
 		}
 
 		void MeshRenderer::Render() {
+			shaderProgram->Activate();
+			shaderProgram->SetUniform("modelMatrix", transform->GetModelMatrix());
 			meshRenderData->Render();
+		}
+
+		void MeshRenderer::OnCreate() {
+			transform = gameObject->GetComponent<Transform>();
+			if(transform == nullptr)
+				transform = gameObject->AddComponent<Transform>();
 		}
 
 		void MeshRenderer::Update() {

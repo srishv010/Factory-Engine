@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include <glm/glm.hpp>
+
 #include "RenderAPIDataTypes.h"
 #include "IShader.h"
 
@@ -21,6 +23,8 @@ namespace GLRenderAPI {
 		void Compile() override;
 		void Activate() override;
 		void Deactivate() override;
+
+		void SetUniform(std::string name, glm::mat4 value) override;
 	};
 
 }

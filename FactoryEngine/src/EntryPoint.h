@@ -56,8 +56,12 @@ int main(int argc, char* argv[]) {
 	Mesh mesh(vertices, indices);
 	GameObject rectangle("Rectangle");
 
+	Transform* transform = rectangle.AddComponent<Transform>();
+
 	MeshRenderer* meshRenderer = rectangle.AddComponent<MeshRenderer>();
 	meshRenderer->SetMesh(&mesh);
+	meshRenderer->shaderProgram = shaderProgram;
+
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -66,8 +70,9 @@ int main(int argc, char* argv[]) {
 	while (!window->ShouldClose()) {
 		window->ProcessInput();
 
-		window->ClearColor(0.5, 0.8, 0.9, 1.0);
+		window->ClearColor(0.5f, 0.8f, 0.9f, 1.0f);
 
+		transform->position = glm::vec3(glm::sin(20.0f * glm::radians(RenderingAPI::GetTime())), 0.0f, 0.0f);
 		shaderProgram->Activate();
 		rectangle.Update();
 

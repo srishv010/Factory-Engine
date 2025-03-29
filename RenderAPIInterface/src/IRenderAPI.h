@@ -19,6 +19,7 @@ namespace RenderAPIInterface {
 		virtual ShaderProgram* CreateShaderProgram() = 0;
 
 		virtual void DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices) = 0;
+		virtual double GetTime() = 0;
 	};
 
 

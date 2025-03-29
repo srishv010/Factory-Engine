@@ -7,4 +7,6 @@ file (GLOB_RECURSE sources
 
 add_library(RenderAPIInterface STATIC ${sources})
 
+target_link_libraries(RenderAPIInterface glm::glm)
+
 target_include_directories(RenderAPIInterface PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)

@@ -27,6 +27,7 @@ namespace Factory {
 				static ShaderProgram* CreateShaderProgram();
 
 				static void DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices);
+				static double GetTime();
 			};
 
 		}

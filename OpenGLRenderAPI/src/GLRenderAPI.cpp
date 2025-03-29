@@ -1,6 +1,6 @@
 #include "GLRenderAPI.h"
 
-#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 #include "GLRenderAPIDataTypes.h"
 
@@ -24,6 +24,10 @@ namespace GLRenderAPI {
 
 	void GLRenderingAPI::DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices) {
 		glDrawElements(ToGLPrimitiveType(primitive), count, ToGLDataType(type), indices);
+	}
+
+	double GLRenderingAPI::GetTime() {
+		return glfwGetTime();
 	}
 
 }

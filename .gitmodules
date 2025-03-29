@@ -1,9 +1,6 @@
-[submodule "FactoryEngine/vendor/glm"]
-	path = FactoryEngine/vendor/glm
-	url = https://github.com/g-truc/glm.git
 [submodule "OpenGLRenderAPI/vendor/glfw"]
 	path = OpenGLRenderAPI/vendor/glfw
 	url = https://github.com/glfw/glfw.git
-[submodule "OpenGLRenderAPI/vendor/glm"]
-	path = OpenGLRenderAPI/vendor/glm
+[submodule "vendor/glm"]
+	path = vendor/glm
 	url = https://github.com/g-truc/glm.git

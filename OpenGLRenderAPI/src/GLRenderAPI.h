@@ -22,12 +22,13 @@ namespace GLRenderAPI {
 
 	class GLRenderingAPI : public IRenderAPI {
 	public:
-		GLWindow* CreateWindow(int width, int height, const char* title);
-		GLVertexArray* CreateVertexArray(std::vector<VertexArrayAttribute> attributes);
-		GLBuffer* CreateBuffer(BufferType type, BufferUsagePattern usagePattern);
-		GLShaderProgram* CreateShaderProgram();
+		GLWindow* CreateWindow(int width, int height, const char* title) override;
+		GLVertexArray* CreateVertexArray(std::vector<VertexArrayAttribute> attributes) override;
+		GLBuffer* CreateBuffer(BufferType type, BufferUsagePattern usagePattern) override;
+		GLShaderProgram* CreateShaderProgram() override;
 
-		void DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices);
+		void DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices) override;
+		double GetTime() override;
 	};
 
 }

@@ -62,6 +62,11 @@ namespace Factory {
 				renderAPI->DrawElements(primitive, count, type, indices);
 			}
 
+			double RenderingAPI::GetTime()
+			{
+				return renderAPI->GetTime();
+			}
+
 		}
 
 	}

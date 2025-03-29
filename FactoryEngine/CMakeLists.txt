@@ -14,8 +14,6 @@ add_dependencies(FactoryEngine OpenGLRenderAPI)
 
 target_link_libraries(FactoryEngine glm::glm RenderAPIInterface)
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/vendor/glm)
-
 target_include_directories(FactoryEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 target_compile_definitions(FactoryEngine PUBLIC FACTORY_PLATFORM_WINDOWS)

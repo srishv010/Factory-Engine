@@ -6,6 +6,7 @@
 #include <sstream>
 
 #include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "GLRenderAPIDataTypes.h"
 
@@ -55,6 +56,12 @@ namespace GLRenderAPI {
 
 	void GLShaderProgram::Deactivate() {
 		glUseProgram(0);
+	}
+
+
+	void GLShaderProgram::SetUniform(std::string name, glm::mat4 value) {
+		int location = glGetUniformLocation(index, name.c_str());
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
 	}
 
 }

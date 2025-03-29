@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "GameObject.h"
 #include "Mesh.h"
+#include "Transform.h"
 
 #include "RenderAPI.h"
 
@@ -34,8 +35,13 @@ namespace Factory {
 			friend class GameObject;
 		private:
 			LowLevelGraphics::MeshRenderData* meshRenderData = nullptr;
+			Transform* transform = nullptr;
+
+			void OnCreate() override;
 			void Update() override;
 		public:
+			ShaderProgram* shaderProgram = nullptr;
+
 			~MeshRenderer();
 			void SetMesh(Mesh* meshData);
 			void Render();
