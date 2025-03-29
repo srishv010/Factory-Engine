@@ -13,6 +13,12 @@ namespace Factory {
 			}
 		}
 
+		void GameObject::EarlyUpdate() {
+			for (Component* component : components) {
+				component->EarlyUpdate();
+			}
+		}
+
 		void GameObject::Update() {
 			for (Component* component : components) {
 				component->Update();
@@ -20,6 +26,8 @@ namespace Factory {
 		}
 
 		void Component::OnCreate() { }
+
+		void Component::EarlyUpdate() { }
 
 		void Component::Update() { }
 

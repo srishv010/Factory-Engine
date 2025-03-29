@@ -7,6 +7,7 @@
 
 #include "Core.h"
 #include "Mesh.h"
+#include "Camera.h"
 #include "EngineConfig.h"
 #include "MeshRenderer.h"
 #include "Utilities.h"
@@ -19,8 +20,8 @@ using namespace Utilities;
 using namespace FactoryEngine;
 using namespace RenderAPI;
 
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 960;
+const unsigned int SCR_HEIGHT = 540;
 
 
 int main(int argc, char* argv[]) {
@@ -43,10 +44,10 @@ int main(int argc, char* argv[]) {
 
 
 	std::vector<Vertex> vertices = {
-		Vertex(0.5f,  0.5f, 0.0f),
-		Vertex(0.5f, -0.5f, 0.0f),
-		Vertex(-0.5f, -0.5f, 0.0f),
-		Vertex(-0.5f,  0.5f, 0.0f)
+		Vertex( 0.5f,  0.0f,  0.5f),
+		Vertex( 0.5f,  0.0f, -0.5f),
+		Vertex(-0.5f,  0.0f, -0.5f),
+		Vertex(-0.5f,  0.0f,  0.5f)
 	};
 	std::vector<unsigned int> indices = {
 		0, 1, 3,
@@ -56,14 +57,21 @@ int main(int argc, char* argv[]) {
 	Mesh mesh(vertices, indices);
 	GameObject rectangle("Rectangle");
 
-	Transform* transform = rectangle.AddComponent<Transform>();
+	Transform* rectangleTransform = rectangle.AddComponent<Transform>();
 
-	MeshRenderer* meshRenderer = rectangle.AddComponent<MeshRenderer>();
-	meshRenderer->SetMesh(&mesh);
-	meshRenderer->shaderProgram = shaderProgram;
+	MeshRenderer* rectangleRenderer = rectangle.AddComponent<MeshRenderer>();
+	rectangleRenderer->SetMesh(&mesh);
+	rectangleRenderer->shaderProgram = shaderProgram;
 
 
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	GameObject camera("Camera");
+
+	Transform* cameraTransform = camera.AddComponent<Transform>();
+	cameraTransform->position = glm::vec3(0.0f, 0.0f, 5.0f);
+
+	Camera* cameraComponent = camera.AddComponent<Camera>();
+	Camera::main = cameraComponent;
+
 
 
 
@@ -72,8 +80,15 @@ int main(int argc, char* argv[]) {
 
 		window->ClearColor(0.5f, 0.8f, 0.9f, 1.0f);
 
-		transform->position = glm::vec3(glm::sin(20.0f * glm::radians(RenderingAPI::GetTime())), 0.0f, 0.0f);
+		camera.EarlyUpdate();
+
+		rectangleTransform->position = glm::vec3(glm::sin(20.0f * glm::radians(RenderingAPI::GetTime())), 0.0f, 0.0f);
+		cameraTransform->position = glm::vec3(0.0f, glm::sin(20.0f * glm::radians(RenderingAPI::GetTime())), 5.0f);
+
 		shaderProgram->Activate();
+
+		shaderProgram->SetUniform("viewProjectionMatrix", cameraComponent->GetViewProjectionMatrix());
+
 		rectangle.Update();
 
 		window->SwapBuffers();

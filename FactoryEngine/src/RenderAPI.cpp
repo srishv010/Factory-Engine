@@ -11,6 +11,7 @@ namespace Factory {
 		namespace RenderAPI {
 
 			IRenderAPI* RenderingAPI::renderAPI = nullptr;
+			Window* RenderingAPI::window = nullptr;
 
 			void RenderingAPI::Initialize(const char* renderAPIName) {
 				if (renderAPI != nullptr) return;
@@ -39,7 +40,8 @@ namespace Factory {
 
 			Window* RenderingAPI::CreateWindow(int width, int height, const char* title)
 			{
-				return renderAPI->CreateWindow(width, height, title);
+				window = renderAPI->CreateWindow(width, height, title);
+				return window;
 			}
 
 			VertexArray* RenderingAPI::CreateVertexArray(std::vector<VertexArrayAttribute> attributes)

@@ -15,6 +15,7 @@ namespace Factory {
 			class FACTORY_API RenderingAPI {
 			public:
 				static IRenderAPI* renderAPI;
+				static Window* window;
 
 				RenderingAPI() = delete;
 				~RenderingAPI() = delete;

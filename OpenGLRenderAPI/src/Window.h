@@ -14,7 +14,6 @@ namespace GLRenderAPI {
 
 		class GLWindow : public Window {
 			public:
-				int width, height;
 				const char* title;
 				GLFWwindow* window;
 
@@ -25,5 +24,9 @@ namespace GLRenderAPI {
 				void PollEvents() override;
 				bool ShouldClose() override;
 				void ClearColor(float r, float g, float b, float a) override;
+
+				int GetWidth() override;
+				int GetHeight() override;
+				float GetAspectRatio() override;
 		};
 }

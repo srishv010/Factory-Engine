@@ -1,12 +1,10 @@
-#include "Window.h"
-
+#include <Window.h>
+#include <functional>
 
 namespace GLRenderAPI {
 
 	GLWindow::GLWindow(int width, int height, const char* title)
-		: width(width),
-		height(height),
-		title(title) {
+		: title(title) {
 		window = nullptr;
 
 		if (glfwInit() == GLFW_FALSE) {
@@ -59,6 +57,23 @@ namespace GLRenderAPI {
 	void GLWindow::ClearColor(float r, float g, float b, float a) {
 		glClearColor(r, g, b, a);
 		glClear(GL_COLOR_BUFFER_BIT);
+	}
+
+	int GLWindow::GetWidth() {
+		int width, height;
+		glfwGetWindowSize(window, &width, &height);
+		return width;
+	}
+
+	int GLWindow::GetHeight() {
+		int width, height;
+		glfwGetWindowSize(window, &width, &height);
+		return height;
+	}
+
+	float GLWindow::GetAspectRatio()
+	{
+		return (float)GetWidth() / (float)GetHeight();
 	}
 
 }

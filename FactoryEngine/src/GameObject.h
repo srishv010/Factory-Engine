@@ -21,6 +21,7 @@ namespace Factory {
 			GameObject(std::string name);
 			~GameObject();
 
+			void EarlyUpdate();
 			void Update();
 			template <typename T> T* AddComponent() {
 				T* component = new T();
@@ -52,6 +53,7 @@ namespace Factory {
 			GameObject* gameObject = nullptr;
 		private:
 			virtual void OnCreate();
+			virtual void EarlyUpdate();
 			virtual void Update();
 		};
 
