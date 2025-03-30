@@ -38,34 +38,32 @@ namespace Factory {
 				delete renderAPI;
 			}
 
-			Window* RenderingAPI::CreateWindow(int width, int height, const char* title)
-			{
+			Window* RenderingAPI::CreateWindow(int width, int height, const char* title) {
 				window = renderAPI->CreateWindow(width, height, title);
 				return window;
 			}
 
-			VertexArray* RenderingAPI::CreateVertexArray(std::vector<VertexArrayAttribute> attributes)
-			{
+			VertexArray* RenderingAPI::CreateVertexArray(std::vector<VertexArrayAttribute> attributes) {
 				return renderAPI->CreateVertexArray(attributes);
 			}
 
-			Buffer* RenderingAPI::CreateBuffer(BufferType type, BufferUsagePattern usagePattern)
-			{
+			Buffer* RenderingAPI::CreateBuffer(BufferType type, BufferUsagePattern usagePattern) {
 				return renderAPI->CreateBuffer(type, usagePattern);
 			}
 
-			ShaderProgram* RenderingAPI::CreateShaderProgram()
-			{
+			ShaderProgram* RenderingAPI::CreateShaderProgram() {
 				return renderAPI->CreateShaderProgram();
 			}
 
-			void RenderingAPI::DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices)
-			{
+			Texture* RenderingAPI::CreateTexture(unsigned char* data, int width, int height, int colorChannels) {
+				return renderAPI->CreateTexture(data, width, height, colorChannels);
+			}
+
+			void RenderingAPI::DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices) {
 				renderAPI->DrawElements(primitive, count, type, indices);
 			}
 
-			double RenderingAPI::GetTime()
-			{
+			double RenderingAPI::GetTime() {
 				return renderAPI->GetTime();
 			}
 

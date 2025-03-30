@@ -26,6 +26,7 @@ namespace Factory {
 				static VertexArray* CreateVertexArray(std::vector<VertexArrayAttribute> attributes);
 				static Buffer* CreateBuffer(BufferType type, BufferUsagePattern usagePattern);
 				static ShaderProgram* CreateShaderProgram();
+				static Texture* CreateTexture(unsigned char* data, int width, int height, int colorChannels);
 
 				static void DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices);
 				static double GetTime();

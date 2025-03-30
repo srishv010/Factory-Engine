@@ -5,6 +5,10 @@
 #include <sstream>
 #include <istream>
 
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+
+
 namespace Factory {
 
 	namespace Utilities {
@@ -29,6 +33,14 @@ namespace Factory {
 			}
 
 			return text;
+		}
+
+		unsigned char* ReadImage(const char* path, int* width, int* height, int* colorChannels) {
+			stbi_set_flip_vertically_on_load(true);
+			unsigned char* data = stbi_load(path, width, height, colorChannels, 0);
+			if (!data)
+				std::cout << "Failed to load image: " << path << std::endl;
+			return data;
 		}
 
 	}

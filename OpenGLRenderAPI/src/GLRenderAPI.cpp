@@ -22,6 +22,10 @@ namespace GLRenderAPI {
 		return new GLShaderProgram();
 	}
 
+	GLTexture* GLRenderingAPI::CreateTexture(unsigned char* data, int width, int height, int colorChannels) {
+		return new GLTexture(data, width, height, colorChannels);
+	}
+
 	void GLRenderingAPI::DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices) {
 		glDrawElements(ToGLPrimitiveType(primitive), count, ToGLDataType(type), indices);
 	}

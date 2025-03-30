@@ -43,11 +43,17 @@ int main(int argc, char* argv[]) {
 	shaderProgram->Compile();
 
 
+	int width, height, colorChannels;
+	unsigned char* data = ReadImage("resources/textures/proto.png", &width, &height, &colorChannels);
+	Texture* texture = RenderingAPI::CreateTexture(data, width, height, colorChannels);
+
+
+
 	std::vector<Vertex> vertices = {
-		Vertex( 0.5f,  0.0f,  0.5f),
-		Vertex( 0.5f,  0.0f, -0.5f),
-		Vertex(-0.5f,  0.0f, -0.5f),
-		Vertex(-0.5f,  0.0f,  0.5f)
+		Vertex(  0.5f,   0.5f,  0.0f,    1.0f,  1.0f ),
+		Vertex(  0.5f,  -0.5f,  0.0f,    1.0f,  0.0f ),
+		Vertex( -0.5f,  -0.5f,  0.0f,    0.0f,  0.0f ),
+		Vertex( -0.5f,   0.5f,  0.0f,    0.0f,  1.0f )
 	};
 	std::vector<unsigned int> indices = {
 		0, 1, 3,
@@ -61,6 +67,7 @@ int main(int argc, char* argv[]) {
 
 	MeshRenderer* rectangleRenderer = rectangle.AddComponent<MeshRenderer>();
 	rectangleRenderer->SetMesh(&mesh);
+	rectangleRenderer->SetTexture(texture);
 	rectangleRenderer->shaderProgram = shaderProgram;
 
 
@@ -97,6 +104,7 @@ int main(int argc, char* argv[]) {
 
 	delete shaderProgram;
 	delete window;
+	delete texture;
 
 	RenderingAPI::Terminate();
 

@@ -8,6 +8,7 @@
 #include "VertexArray.h"
 #include "Buffer.h"
 #include "Shader.h"
+#include "Texture.h"
 
 
 #ifdef OPEN_GL_RENDER_API_BUILD_DLL
@@ -26,6 +27,7 @@ namespace GLRenderAPI {
 		GLVertexArray* CreateVertexArray(std::vector<VertexArrayAttribute> attributes) override;
 		GLBuffer* CreateBuffer(BufferType type, BufferUsagePattern usagePattern) override;
 		GLShaderProgram* CreateShaderProgram() override;
+		GLTexture* CreateTexture(unsigned char* data, int width, int height, int colorChannels) override;
 
 		void DrawElements(PrimitiveType primitive, unsigned int count, DataType type, const void* indices) override;
 		double GetTime() override;

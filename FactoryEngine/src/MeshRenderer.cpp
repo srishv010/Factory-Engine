@@ -38,7 +38,8 @@ namespace Factory {
 				indexBuffer->SetData(&(meshData->indices)[0], meshData->indices.size() * sizeof(unsigned int));
                 indexBuffer->Bind();
 
-				vertexArray->AddAttribute(VertexArrayAttribute(0, 3, DataType::FLOAT, false, 3 * sizeof(float), (void*)0));
+				vertexArray->AddAttribute(VertexArrayAttribute(0, 3, DataType::FLOAT, false, 5 * sizeof(float), (void*)0));
+				vertexArray->AddAttribute(VertexArrayAttribute(1, 2, DataType::FLOAT, false, 5 * sizeof(float), (void*) offsetof(Vertex, uvs)));
 
 				vertexArray->Unbind();
 				vertexBuffer->Unbind();
@@ -58,14 +59,20 @@ namespace Factory {
 			meshRenderData->TransferData();
 		}
 
+		void MeshRenderer::SetTexture(Texture* texture) {
+			this->texture = texture;
+		}
+
 		MeshRenderer::~MeshRenderer() {
 			delete meshRenderData;
 		}
 
 		void MeshRenderer::Render() {
 			shaderProgram->Activate();
+			texture->Bind(0);
 			shaderProgram->SetUniform("modelMatrix", transform->GetModelMatrix());
 			meshRenderData->Render();
+			texture->Unbind();
 		}
 
 		void MeshRenderer::OnCreate() {

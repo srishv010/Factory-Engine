@@ -31,8 +31,11 @@ add_custom_command(TARGET Sandbox POST_BUILD
     $<IF:$<CONFIG:Debug>,${CMAKE_BINARY_DIR}/bin/Debug,${CMAKE_BINARY_DIR}/bin/Release>
 )
 
-add_custom_command(TARGET Sandbox POST_BUILD
+
+add_custom_target(CopySandboxResources ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     ${CMAKE_CURRENT_SOURCE_DIR}/resources
     $<IF:$<CONFIG:Debug>,${CMAKE_BINARY_DIR}/bin/Debug/resources,${CMAKE_BINARY_DIR}/bin/Release/resources>
 )
+
+add_dependencies(Sandbox CopySandboxResources)

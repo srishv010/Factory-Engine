@@ -26,7 +26,6 @@ namespace Factory {
 				~MeshRenderData();
 				void TransferData();
 				void Render();
-
 			};
 
 		}
@@ -36,6 +35,7 @@ namespace Factory {
 		private:
 			LowLevelGraphics::MeshRenderData* meshRenderData = nullptr;
 			Transform* transform = nullptr;
+			Texture* texture = nullptr;
 
 			void OnCreate() override;
 			void Update() override;
@@ -44,6 +44,7 @@ namespace Factory {
 
 			~MeshRenderer();
 			void SetMesh(Mesh* meshData);
+			void SetTexture(Texture* texture);
 			void Render();
 		};
 

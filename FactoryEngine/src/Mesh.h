@@ -13,9 +13,10 @@ namespace Factory
 
 		struct FACTORY_API Vertex {
 			glm::vec3 position;
+			glm::vec2 uvs;
 
-			Vertex(float x, float y, float z);
-			Vertex(glm::vec3 position);
+			Vertex(float x, float y, float z, float u, float v);
+			Vertex(glm::vec3 position, glm::vec2 uvs);
 			Vertex();
 		};
 
