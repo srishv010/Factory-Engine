@@ -23,7 +23,9 @@ namespace GLRenderAPI {
 				void SwapBuffers() override;
 				void PollEvents() override;
 				bool ShouldClose() override;
+				void EnableDepthBuffer() override;
 				void ClearColor(float r, float g, float b, float a) override;
+				void ClearDepthBuffer() override;
 
 				int GetWidth() override;
 				int GetHeight() override;

@@ -50,15 +50,64 @@ int main(int argc, char* argv[]) {
 
 
 	std::vector<Vertex> vertices = {
-		Vertex(  0.5f,   0.5f,  0.0f,    1.0f,  1.0f ),
-		Vertex(  0.5f,  -0.5f,  0.0f,    1.0f,  0.0f ),
-		Vertex( -0.5f,  -0.5f,  0.0f,    0.0f,  0.0f ),
-		Vertex( -0.5f,   0.5f,  0.0f,    0.0f,  1.0f )
+		// Front face
+		              // Positions                   // Texture coordinates
+		Vertex(       -0.5f, -0.5f, 0.5f,            0.0f,  1.0f),
+		Vertex(       0.5f, -0.5f, 0.5f,             1.0f,  1.0f),
+		Vertex(       0.5f,  0.5f, 0.5f,             1.0f,  0.0f),
+		Vertex(       -0.5f,  0.5f, 0.5f,            0.0f,  0.0f),
+
+		// Back face				          
+		Vertex(       -0.5f, -0.5f, -0.5f,           0.0f,  0.0f),
+		Vertex(       -0.5f,  0.5f, -0.5f,           0.0f,  1.0f),
+		Vertex(       0.5f,  0.5f, -0.5f,            1.0f,  1.0f),
+		Vertex(       0.5f, -0.5f, -0.5f,            1.0f,  0.0f),
+
+		// Left face				          
+		Vertex(       -0.5f, -0.5f, -0.5f,           0.0f,  0.0f),
+		Vertex(       -0.5f, -0.5f,  0.5f,           0.0f,  1.0f),
+		Vertex(       -0.5f,  0.5f,  0.5f,           1.0f,  1.0f),
+		Vertex(       -0.5f,  0.5f, -0.5f,           1.0f,  0.0f),
+
+		// Right face				          
+		Vertex(       0.5f, -0.5f, -0.5f,            0.0f,  0.0f),
+		Vertex(       0.5f,  0.5f, -0.5f,            0.0f,  1.0f),
+		Vertex(       0.5f,  0.5f,  0.5f,            1.0f,  1.0f),
+		Vertex(       0.5f, -0.5f,  0.5f,            1.0f,  0.0f),
+
+		// Bottom face				          
+		Vertex(       -0.5f, -0.5f, -0.5f,           0.0f,  0.0f),
+		Vertex(       0.5f, -0.5f, -0.5f,            1.0f,  0.0f),
+		Vertex(       0.5f, -0.5f,  0.5f,            1.0f,  1.0f),
+		Vertex(       -0.5f, -0.5f,  0.5f,           0.0f,  1.0f),
+
+		// Top face					          
+		Vertex(       -0.5f,  0.5f, -0.5f,           0.0f,  0.0f),
+		Vertex(       -0.5f,  0.5f,  0.5f,           0.0f,  1.0f),
+		Vertex(       0.5f,  0.5f,  0.5f,            1.0f,  1.0f),
+		Vertex(       0.5f,  0.5f, -0.5f,            1.0f,  0.0f),
 	};
+
+
 	std::vector<unsigned int> indices = {
-		0, 1, 3,
-		1, 2, 3
-	};
+		// Front face
+		0, 1, 2,  0, 2, 3,
+
+		// Back face
+		4, 5, 6,  4, 6, 7,
+
+		// Left face
+		8, 9, 10, 8, 10, 11,
+
+		// Right face
+		12, 13, 14, 12, 14, 15,
+
+		// Bottom face
+		16, 17, 18, 16, 18, 19,
+
+		// Top face
+		20, 21, 22, 20, 22, 23
+	};;
 
 	Mesh mesh(vertices, indices);
 	GameObject rectangle("Rectangle");
@@ -80,17 +129,18 @@ int main(int argc, char* argv[]) {
 	Camera::main = cameraComponent;
 
 
-
+	window->EnableDepthBuffer();
 
 	while (!window->ShouldClose()) {
 		window->ProcessInput();
 
 		window->ClearColor(0.5f, 0.8f, 0.9f, 1.0f);
+		window->ClearDepthBuffer();
 
 		camera.EarlyUpdate();
 
 		rectangleTransform->position = glm::vec3(glm::sin(20.0f * glm::radians(RenderingAPI::GetTime())), 0.0f, 0.0f);
-		cameraTransform->position = glm::vec3(0.0f, glm::sin(20.0f * glm::radians(RenderingAPI::GetTime())), 5.0f);
+		cameraTransform->position = glm::vec3(1.0f, glm::sin(20.0f * glm::radians(RenderingAPI::GetTime())), 5.0f);
 
 		shaderProgram->Activate();
 

@@ -11,7 +11,9 @@ namespace RenderAPIInterface {
 		virtual void SwapBuffers() = 0;
 		virtual void PollEvents() = 0;
 		virtual bool ShouldClose() = 0;
+		virtual void EnableDepthBuffer() = 0;
 		virtual void ClearColor(float r, float g, float b, float a) = 0;
+		virtual void ClearDepthBuffer() = 0;
 
 		virtual int GetWidth() = 0;
 		virtual int GetHeight() = 0;
