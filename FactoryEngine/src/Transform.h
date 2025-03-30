@@ -21,6 +21,9 @@ namespace Factory {
 			~Transform();
 
 			glm::mat4 GetModelMatrix();
+			glm::vec3 GetWorldPosition();
+			glm::quat GetWorldRotation();
+			glm::vec3 GetWorldScale();
 		};
 
 	}

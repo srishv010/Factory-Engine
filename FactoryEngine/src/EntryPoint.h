@@ -50,8 +50,8 @@ int main(int argc, char* argv[]) {
 
 
 	std::vector<Vertex> vertices = {
-		// Front face
 		              // Positions                   // Texture coordinates
+		// Front face
 		Vertex(       -0.5f, -0.5f, 0.5f,            0.0f,  1.0f),
 		Vertex(       0.5f, -0.5f, 0.5f,             1.0f,  1.0f),
 		Vertex(       0.5f,  0.5f, 0.5f,             1.0f,  0.0f),
@@ -107,17 +107,18 @@ int main(int argc, char* argv[]) {
 
 		// Top face
 		20, 21, 22, 20, 22, 23
-	};;
+	};
 
 	Mesh mesh(vertices, indices);
-	GameObject rectangle("Rectangle");
+	GameObject testCube("Cube");
+	GameObject* cube = GameObject::FindGameObjectWithName("Cube");
 
-	Transform* rectangleTransform = rectangle.AddComponent<Transform>();
+	Transform* cubeTransform = cube->AddComponent<Transform>();
 
-	MeshRenderer* rectangleRenderer = rectangle.AddComponent<MeshRenderer>();
-	rectangleRenderer->SetMesh(&mesh);
-	rectangleRenderer->SetTexture(texture);
-	rectangleRenderer->shaderProgram = shaderProgram;
+	MeshRenderer* cubeRenderer = cube->AddComponent<MeshRenderer>();
+	cubeRenderer->SetMesh(&mesh);
+	cubeRenderer->SetTexture(texture);
+	cubeRenderer->shaderProgram = shaderProgram;
 
 
 	GameObject camera("Camera");
@@ -139,14 +140,14 @@ int main(int argc, char* argv[]) {
 
 		camera.EarlyUpdate();
 
-		rectangleTransform->position = glm::vec3(glm::sin(20.0f * glm::radians(RenderingAPI::GetTime())), 0.0f, 0.0f);
+		cubeTransform->position = glm::vec3(glm::sin(20.0f * glm::radians(RenderingAPI::GetTime())), 0.0f, 0.0f);
 		cameraTransform->position = glm::vec3(1.0f, glm::sin(20.0f * glm::radians(RenderingAPI::GetTime())), 5.0f);
 
 		shaderProgram->Activate();
-
+		
 		shaderProgram->SetUniform("viewProjectionMatrix", cameraComponent->GetViewProjectionMatrix());
 
-		rectangle.Update();
+		cube->Update();
 
 		window->SwapBuffers();
 		window->PollEvents();
